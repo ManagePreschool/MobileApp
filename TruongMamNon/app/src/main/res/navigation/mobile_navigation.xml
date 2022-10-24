@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_thongtincuabe">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.hufi.truongmamnon.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_thongtincuabe"
+        android:name="com.hufi.truongmamnon.ui.Thongtincuabe.ThongtincuabeFragment"
+        android:label="Thông tin của bé"
+        tools:layout="@layout/fragment_thongtincuabe" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.hufi.truongmamnon.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_tinhhinhsuckhoe"
+        android:name="com.hufi.truongmamnon.ui.Tinhhinhsuckhoe.Tinhhinhsuckhoe"
+        android:label="Tình hình sức khoẻ"
+        tools:layout="@layout/fragment_tinhhinhsuckhoe" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.hufi.truongmamnon.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_hocphi"
+        android:name="com.hufi.truongmamnon.ui.Hocphi.HocphiFragment"
+        android:label="Học phí"
+        tools:layout="@layout/fragment_hocphi" />
 </navigation>

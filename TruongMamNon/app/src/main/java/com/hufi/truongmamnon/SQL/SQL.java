@@ -3,15 +3,18 @@ package com.hufi.truongmamnon.SQL;
 import android.os.StrictMode;
 
 import com.hufi.truongmamnon.Class.Account;
+import com.hufi.truongmamnon.Class.HocSinh;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SQL {
-    private static String ip = "192.168.1.189";
+    private static String ip = "192.168.1.25";
     private static String port = "1433";
     private static String Classes = "net.sourceforge.jtds.jdbc.Driver";
     private static String database = "HocPhi";
@@ -100,5 +103,19 @@ public class SQL {
             e.printStackTrace();
         }
         return new Account(email, pwd);
+    }
+
+    public List<HocSinh> getHocSinhList() throws SQLException {
+        List<HocSinh> list = new ArrayList<>();
+        Statement statement = connection.createStatement();// Tạo đối tượng Statement.
+        String sql = "select * from HocSinh";
+        // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
+        ResultSet rs = statement.executeQuery(sql);
+        while (rs.next()) {
+            list.add(new HocSinh(rs.getString("TenHocSinh"), rs.getString("GioiTinh"), rs.getString("NamSinh"), rs.getString("MaLop"), rs.getString("MaHeHoc")
+                    , rs.getString("TenPhuHuynh"), rs.getString("DienThoai"), rs.getString("DiaChiLienHe"), rs.getString("NgayDangKy")));// Đọc dữ liệu từ ResultSet
+        }
+        connection.close();// Đóng kết nối
+        return list;
     }
 }
