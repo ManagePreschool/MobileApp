@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_thongtincuabe" />
 
     <fragment
+        android:id="@+id/nav_diemdanh"
+        android:name="com.hufi.truongmamnon.ui.Diemdanh.DiemdanhFragment"
+        android:label="Điểm danh"
+        tools:layout="@layout/fragment_diemdanh" />
+
+    <fragment
         android:id="@+id/nav_tinhhinhsuckhoe"
         android:name="com.hufi.truongmamnon.ui.Tinhhinhsuckhoe.Tinhhinhsuckhoe"
         android:label="Tình hình sức khoẻ"
@@ -22,4 +28,5 @@
         android:name="com.hufi.truongmamnon.ui.Hocphi.HocphiFragment"
         android:label="Học phí"
         tools:layout="@layout/fragment_hocphi" />
+
 </navigation>

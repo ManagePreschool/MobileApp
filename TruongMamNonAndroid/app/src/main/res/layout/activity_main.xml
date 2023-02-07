@@ -4,31 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/dangnhap"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_height="120dp"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/mamnon" />
 
     <TextView
-        android:id="@+id/lbUsername"
+        android:id="@+id/lbMaHS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="220dp"
-        android:text="Email:"
+        android:layout_marginTop="180dp"
+        android:text="Mã học sinh:"
         android:textSize="15dp" />
 
     <EditText
-        android:id="@+id/txtUsername"
+        android:id="@+id/txtMaHS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
-        android:layout_below="@id/lbUsername"
+        android:layout_below="@id/lbMaHS"
         android:layout_marginRight="50dp"
         android:textSize="15dp" />
 
@@ -38,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/txtUsername"
+        android:layout_below="@id/txtMaHS"
         android:text="Mật khẩu:"
         android:textSize="15dp"
         />

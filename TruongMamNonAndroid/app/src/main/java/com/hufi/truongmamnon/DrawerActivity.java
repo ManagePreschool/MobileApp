@@ -1,7 +1,21 @@
 package com.hufi.truongmamnon;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +27,10 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -25,6 +43,17 @@ import com.hufi.truongmamnon.Email.ConfigMail;
 import com.hufi.truongmamnon.Email.SendMail;
 import com.hufi.truongmamnon.SQL.SQL;
 import com.hufi.truongmamnon.databinding.ActivityDrawerBinding;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class DrawerActivity extends AppCompatActivity {
 
@@ -56,7 +85,7 @@ public class DrawerActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_thongtincuabe, R.id.nav_tinhhinhsuckhoe, R.id.nav_hocphi)
+                R.id.nav_thongtincuabe, R.id.nav_diemdanh, R.id.nav_tinhhinhsuckhoe, R.id.nav_hocphi)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_drawer);
@@ -76,21 +105,119 @@ public class DrawerActivity extends AppCompatActivity {
             return;
         }
 
-        String email = getIntent().getStringExtra("email");
+        int maHS = getIntent().getIntExtra("maHS", 0);
         //String username = getIntent().getStringExtra("username");
 
-        HocSinh hs = db.getHocSinh(email);
+        HocSinh hs = db.getHocSinh(maHS);
+
+        String email = hs.getEmailPhuHuynh();
+        ConfigMail.EMAIL_RECIEVED = email;
 
         txtEmail.setText(email);
         txtName.setText(hs.getHo() + " " + hs.getTen());
 
+        String image = hs.getHinhAnh();
+
+        if (image != "") {
+            byte[] bytes = Base64.decode(image,Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+            imageView.setImageBitmap(bitmap);
+        }
+        else
+            imageView.setImageResource(R.drawable.defaultavt);
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String time = df.format(Calendar.getInstance().getTime());
+
+        int ma = hs.getMa();
+        String trangThaiDiemDanh = "";
+        try {
+            trangThaiDiemDanh = db.getDiemDanhVang(Calendar.getInstance().getTime(), ma);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        if (trangThaiDiemDanh.equals("") == true)
+            trangThaiDiemDanh = "Có mặt";
+
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.cancelAll();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("My notification", "My notification", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setVibrationPattern(new long[]{0, 100, 100, 100});        //0, 1000, 500, 1000
+            channel.enableVibration(false);
+            notificationManager.createNotificationChannel(channel);
+
+            NotificationCompat.Builder noti = new NotificationCompat.Builder(this, "My notification");
+
+            noti.setContentTitle("Điểm danh ngày hôm nay (" + time + ")")
+                    .setContentText(trangThaiDiemDanh)
+                    //builder.setSmallIcon(R.mipmap.ic_launcher_round);
+                    .setSmallIcon(R.drawable.mamnon)
+                    .setAutoCancel(false)
+                    .setOnlyAlertOnce(true);
+
+            notificationManager.notify(1, noti.build());
+        }
+
         //Creating SendMail object
         try {
-            SendMail sm = new SendMail(this, ConfigMail.EMAIL_RECIEVED, "Login Confirmation", "Đã đăng nhập bằng tài khoản " + email);   //(context, email recieved, title, content)
+            SendMail sm = new SendMail(this, ConfigMail.EMAIL_RECIEVED, "Login Confirmation", "Đã đăng nhập bằng tài khoản " + email
+                    + "\n\nTrạng thái điểm danh ngày hôm nay: " + trangThaiDiemDanh);   //(context, email recieved, title, content)
             sm.execute();
         }
         catch (Exception e){
             Log.v("err","Error while sending mail:"+e.getMessage());
+        }
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, 1);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Uri selectedImageUri = data.getData();
+            //String path = getPath(selectedImageUri);
+
+            Bitmap bmp = null;
+            ByteArrayOutputStream bos = null;
+            byte[] bt = null;
+            String hinhAnh = null;
+            try {
+                //Upload
+                bmp = BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImageUri));
+                bos = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+                bt = bos.toByteArray();
+
+                hinhAnh = Base64.encodeToString(bt, Base64.DEFAULT);
+
+                int ma = getIntent().getIntExtra("maHS", 0);
+                db.uploadHinhHocSinh(ma, hinhAnh);
+
+                //Load image
+                HocSinh hs = db.getHocSinh(ma);
+                String image = hs.getHinhAnh();
+                if (image != "") {
+                    byte[] bytes = Base64.decode(image,Base64.DEFAULT);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    imageView.setImageBitmap(bitmap);
+                }
+                else
+                    imageView.setImageResource(R.drawable.defaultavt);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 

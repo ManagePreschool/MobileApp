@@ -34,7 +34,7 @@ public class ThongtincuabeFragment extends Fragment {
 
     private FragmentThongtincuabeBinding binding;
 
-    TextView lbMa, lbHoTen, lbGioiTinh, lbNgaySinh, lbNoiSinh, lbLopHoc, lbNgayNhapHoc, lbDiaChi;
+    TextView lbMa, lbHoTen, lbGioiTinh, lbNgaySinh, lbNoiSinh, lbLopHoc, lbNgayNhapHoc, lbDiaChi, lbDanToc, lbTonGiao,  lbQuocTich;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,6 +55,9 @@ public class ThongtincuabeFragment extends Fragment {
         lbLopHoc = root.findViewById(R.id.lbLopHoc);
         lbNgayNhapHoc = root.findViewById(R.id.lbNgayNhapHoc);
         lbDiaChi = root.findViewById(R.id.lbDiaChi);
+        lbDanToc = root.findViewById(R.id.lbDanToc);
+        lbTonGiao = root.findViewById(R.id.lbTonGiao);
+        lbQuocTich = root.findViewById(R.id.lbQuocTich);
 
         SQL db = new SQL();
 
@@ -81,22 +84,21 @@ public class ThongtincuabeFragment extends Fragment {
             throwables.printStackTrace();
         }*/
 
-        HocSinh hs = db.getHocSinh(ConfigMail.EMAIL_RECIEVED);
+        HocSinh hs = db.getHocSinh(ConfigMail.MA);
 
-        String ma = hs.getMa();
+        int ma = hs.getMa();
+        String email = hs.getEmailPhuHuynh();
         String ho = hs.getHo();
         String ten = hs.getTen();
         String gioiTinh = hs.getGioiTinh();
         String diaChi = hs.getDiaChi();
+        String danToc = hs.getDanToc();
+        String tonGiao = hs.getTonGiao();
+        String quocTich = hs.getQuocTich();
 
         int maLop = hs.getMaLop();
         LopHoc lh = db.getLopHoc(maLop);
         String tenLop = lh.getTenLop();
-
-        /*String gioiTinhs = "";
-        if (gioiTinh == true)
-            gioiTinhs = "Nam";
-        else gioiTinhs = "Nữ";*/
 
         Date ngaySinh = hs.getNgaySinh();
         String noiSinh = hs.getNoiSinh();
@@ -114,6 +116,9 @@ public class ThongtincuabeFragment extends Fragment {
         lbLopHoc.setText(lbLopHoc.getText().toString() + tenLop);
         lbNgayNhapHoc.setText(lbNgayNhapHoc.getText().toString() + ngayNhapHocs);
         lbDiaChi.setText(lbDiaChi.getText().toString() + diaChi);
+        lbDanToc.setText(lbDanToc.getText().toString() + danToc);
+        lbTonGiao.setText(lbTonGiao.getText().toString() + tonGiao);
+        lbQuocTich.setText(lbQuocTich.getText().toString() + quocTich);
 
         try {
             db.Close();

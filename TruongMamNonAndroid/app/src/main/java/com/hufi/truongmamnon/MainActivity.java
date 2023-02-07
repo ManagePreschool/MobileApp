@@ -16,7 +16,7 @@ import java.sql.SQLException;
 
 public class MainActivity extends AppCompatActivity {
     Button btnLogin;
-    EditText txtUsername, txtPassword;
+    EditText txtMaHS, txtPassword;
     SQL db;
 
     @Override
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnLogin = findViewById(R.id.btnLogin);
-        txtUsername = findViewById(R.id.txtUsername);
+        txtMaHS = findViewById(R.id.txtMaHS);
         txtPassword = findViewById(R.id.txtPassword);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -39,25 +39,25 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                String email = txtUsername.getText().toString();
+                int maHS = Integer.parseInt(txtMaHS.getText().toString());
                 String password = txtPassword.getText().toString();
 
-                if (email.equals("") == true || password.equals("") == true) {
-                    Toast.makeText(MainActivity.this, "Chưa nhập email/password.", Toast.LENGTH_SHORT).show();
+                if (txtMaHS.getText().toString().equals("") == true || password.equals("") == true) {
+                    Toast.makeText(MainActivity.this, "Chưa nhập mã HS/mật khẩu.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    boolean isExist = db.isUserExist(email, password);
+                    boolean isExist = db.isUserExist(maHS, password);
 
                     if (isExist) {
-                        ConfigMail.EMAIL_RECIEVED = email;
+                        ConfigMail.MA = maHS;
 
                         Intent intent = new Intent(MainActivity.this, DrawerActivity.class);
                         //intent.putExtra("name", name);
-                        intent.putExtra("email", email);
+                        intent.putExtra("maHS", maHS);
                         startActivity(intent);
                     }
                     else
-                        Toast.makeText(MainActivity.this, "Sai email/password.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Sai mã HS/mật khẩu.", Toast.LENGTH_SHORT).show();
 
                     try {
                         db.Close();

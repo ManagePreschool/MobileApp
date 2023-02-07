@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/giaodien"
+    tools:context=".ui.Diemdanh.DiemdanhFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="701dp"
+        android:layout_marginTop="120dp"
+        android:textSize="15dp"
+        android:text="Vắng cả ngày: "
+        android:textColor="@color/black"
+        android:id="@+id/lbVangCaNgay" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/lbVangCaNgay"
+        android:textSize="15dp"
+        android:text="Vắng sáng: "
+        android:textColor="@color/black"
+        android:id="@+id/lbVangSang" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:textSize="15dp"
+        android:text="Vắng chiều: "
+        android:textColor="@color/black"
+        android:layout_toRightOf="@id/lbVangSang"
+        android:layout_below="@id/lbVangCaNgay"
+        android:id="@+id/lbVangChieu"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/lbVangSang"
+        android:layout_toRightOf="@id/lbVangSang"
+        android:textSize="15dp"
+        android:text="Không phép: "
+        android:textColor="@color/black"
+        android:id="@+id/lbKhongPhep"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="20dp"
+        android:textSize="15dp"
+        android:text="Có phép: "
+        android:textColor="@color/black"
+        android:layout_below="@id/lbVangSang"
+        android:id="@+id/lbCoPhep"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:layout_below="@id/lbCoPhep"
+        android:id="@+id/listDiemDanh" />
+
+</RelativeLayout>

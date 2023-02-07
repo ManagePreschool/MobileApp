@@ -3,10 +3,11 @@ package com.hufi.truongmamnon.Class;
 import java.util.Date;
 
 public class HocSinh {
-    String ma;
+    int ma;
     String ho;
     String ten;
     String gioiTinh;
+    String hinhAnh;
     int maLop;
     Date ngayNhapHoc;
     Date ngaySinh;
@@ -19,11 +20,18 @@ public class HocSinh {
     String hoTenPhuHuynh;
     String emailPhuHuynh;
 
-    public HocSinh(String ma, String ho, String ten, String gioiTinh, int maLop, Date ngayNhapHoc, Date ngaySinh, String noiSinh, String danToc, String tonGiao, String quocTich, String hoKhau, String diaChi, String hoTenPhuHuynh, String emailPhuHuynh) {
+    public HocSinh(int ma, String ho, String ten) {
+        this.ma = ma;
+        this.ho = ho;
+        this.ten = ten;
+    }
+
+    public HocSinh(int ma, String ho, String ten, String gioiTinh, String hinhAnh, int maLop, Date ngayNhapHoc, Date ngaySinh, String noiSinh, String danToc, String tonGiao, String quocTich, String hoKhau, String diaChi, String hoTenPhuHuynh, String emailPhuHuynh) {
         this.ma = ma;
         this.ho = ho;
         this.ten = ten;
         this.gioiTinh = gioiTinh;
+        this.hinhAnh = hinhAnh;
         this.maLop = maLop;
         this.ngayNhapHoc = ngayNhapHoc;
         this.ngaySinh = ngaySinh;
@@ -40,10 +48,11 @@ public class HocSinh {
     @Override
     public String toString() {
         return "HocSinh{" +
-                "ma='" + ma + '\'' +
+                "ma=" + ma +
                 ", ho='" + ho + '\'' +
                 ", ten='" + ten + '\'' +
                 ", gioiTinh='" + gioiTinh + '\'' +
+                ", hinhAnh='" + hinhAnh + '\'' +
                 ", maLop=" + maLop +
                 ", ngayNhapHoc=" + ngayNhapHoc +
                 ", ngaySinh=" + ngaySinh +
@@ -58,11 +67,11 @@ public class HocSinh {
                 '}';
     }
 
-    public String getMa() {
+    public int getMa() {
         return ma;
     }
 
-    public void setMa(String ma) {
+    public void setMa(int ma) {
         this.ma = ma;
     }
 
@@ -88,6 +97,14 @@ public class HocSinh {
 
     public void setGioiTinh(String gioiTinh) {
         this.gioiTinh = gioiTinh;
+    }
+
+    public String getHinhAnh() {
+        return hinhAnh;
+    }
+
+    public void setHinhAnh(String hinhAnh) {
+        this.hinhAnh = hinhAnh;
     }
 
     public int getMaLop() {

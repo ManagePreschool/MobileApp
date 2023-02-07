@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1935" />
         <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/drawable/side_nav_bar.xml" value="0.1935" />
         <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/activity_drawer.xml" value="0.18541666666666667" />
         <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/activity_feedback.xml" value="0.25" />
@@ -19,13 +20,16 @@
         <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/content_scrolling.xml" value="0.18541666666666667" />
         <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/content_trang_chu.xml" value="0.18541666666666667" />
         <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/fragment_dashboard.xml" value="0.18541666666666667" />
+        <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/fragment_diemdanh.xml" value="0.25" />
         <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/fragment_gallery.xml" value="0.18541666666666667" />
+        <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/fragment_hocphi.xml" value="0.18541666666666667" />
         <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/fragment_home.xml" value="0.18541666666666667" />
         <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/fragment_notifications.xml" value="0.18541666666666667" />
-        <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/fragment_thongtincuabe.xml" value="0.33" />
+        <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/fragment_thongtincuabe.xml" value="0.22" />
         <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/fragment_tinhhinhsuckhoe.xml" value="0.18541666666666667" />
+        <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/list_diemdanh.xml" value="0.18541666666666667" />
         <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/list_hocsinh.xml" value="0.18541666666666667" />
-        <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/nav_header_drawer.xml" value="0.18541666666666667" />
+        <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/nav_header_drawer.xml" value="0.25" />
         <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/nav_header_main.xml" value="0.18541666666666667" />
         <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/layout/nav_header_main_test.xml" value="0.18541666666666667" />
         <entry key="..\:/Android apps/TruongMamNonAndroid/app/src/main/res/menu/activity_main_drawer.xml" value="0.18541666666666667" />

@@ -34,7 +34,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
         SQL db = new SQL();
 
-        HocSinh hs = db.getHocSinh(ConfigMail.EMAIL_RECIEVED);
+        HocSinh hs = db.getHocSinh(ConfigMail.MA);
         lbNguoiGui.setText(hs.getHoTenPhuHuynh());
 
         btnFeedback.setOnClickListener(new View.OnClickListener() {
